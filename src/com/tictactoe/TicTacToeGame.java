@@ -5,14 +5,21 @@ import java.util.Scanner;
 public class TicTacToeGame {
 
 	private char[] board = new char[10];
+	static TicTacToeGame tic = new TicTacToeGame();
+	private char userChoice;
+	private char computerChoice;
 	
 	public static void main(String[] args) {
 	
 		System.out.println("welcome to the game");
-		TicTacToeGame tic = new TicTacToeGame();
+		
 		tic.createBoard();
 		tic.input();
 		tic.displayBoard();
+        int location = tic.selectLocation();
+        tic.board[location] = tic.userChoice;
+		tic.displayBoard();
+		
 	
 	}
 	
@@ -25,8 +32,7 @@ public class TicTacToeGame {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter the choice X or O");
-		char userChoice = sc.next().charAt(0);
-		char computerChoice ;
+		userChoice = sc.next().charAt(0);
 		if( userChoice == 'X')
 		{
 			computerChoice = 'O';
@@ -53,6 +59,20 @@ public class TicTacToeGame {
 		System.out.println("---------");
 		System.out.println(board[7] +" | " +board[8]+ " | "+ board[9]);
 		
+	}
+	
+	public int selectLocation() {
+		System.out.println("Enter digit in between 1-9 to selct the location");
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			int location = sc.nextInt();
+			if( location < 0 || location > 9)
+			{
+				System.out.println("Not a valid location. Try again");
+				continue;
+			}
+			return location;
+		}
 	}
 	
 	
