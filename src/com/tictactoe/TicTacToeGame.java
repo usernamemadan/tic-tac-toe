@@ -16,11 +16,10 @@ public class TicTacToeGame {
 		tic.createBoard();
 		tic.input();
 		tic.displayBoard();
-        int location = tic.selectLocation();
-        tic.board[location] = tic.userChoice;
+        tic.selectLocation();
 		tic.displayBoard();
-		
-	
+		tic.selectLocation();
+		tic.displayBoard();
 	}
 	
 	public void createBoard() {
@@ -61,7 +60,7 @@ public class TicTacToeGame {
 		
 	}
 	
-	public int selectLocation() {
+	public void selectLocation() {
 		System.out.println("Enter digit in between 1-9 to selct the location");
 		Scanner sc = new Scanner(System.in);
 		while(true) {
@@ -71,7 +70,13 @@ public class TicTacToeGame {
 				System.out.println("Not a valid location. Try again");
 				continue;
 			}
-			return location;
+			if(tic.board[location] != ' ')
+			{
+				System.out.println("Entered location is already filled");
+				continue;
+			}
+			tic.board[location] = tic.userChoice;
+			break;
 		}
 	}
 	
