@@ -16,10 +16,12 @@ public class TicTacToeGame {
 		tic.createBoard();
 		tic.input();
 		tic.displayBoard();
-        tic.selectLocation();
-		tic.displayBoard();
-		tic.selectLocation();
-		tic.displayBoard();
+        
+		if(tic.toss())
+			tic.userMove();
+		else
+			tic.computerMove();
+		
 	}
 	
 	public void createBoard() {
@@ -72,12 +74,41 @@ public class TicTacToeGame {
 			}
 			if(tic.board[location] != ' ')
 			{
-				System.out.println("Entered location is already filled");
+				System.out.println("Entered location is already filled. Try again");
 				continue;
 			}
 			tic.board[location] = tic.userChoice;
 			break;
 		}
+	}
+	
+	public boolean toss()
+	{
+		final int HEAD = 1;
+		final int TAIL = 2;
+		System.out.println("Toss! \nEnter you choice \n1.HEAD \n2.TAIL");
+		Scanner sc = new Scanner(System.in);
+		int choice = sc.nextInt();
+		int result = 1 + (int) (Math.random()*10%2) ;
+		System.out.println(result);
+		if( choice == result)
+		{
+			System.out.println("You won the toss");
+			return true;
+		}
+		else {
+			System.out.println("You lost the toss");
+			return false;
+		}
+		
+	}
+	
+	public void userMove() {
+		
+	}
+	
+	public void computerMove() {
+		
 	}
 	
 	
