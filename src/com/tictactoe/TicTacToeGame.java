@@ -174,6 +174,16 @@ public class TicTacToeGame {
 			temp = userChoice;
 			n++;
 		}
+		
+		if(arr[1] == ' ')
+			board[1] = computerChoice;
+		else if(arr[3] == ' ')
+			board[3] = computerChoice;
+		else if(arr[7] == ' ')
+			board[7] = computerChoice;
+		else if(arr[9] == ' ')
+			board[9] = computerChoice;
+		
 	}
 	
 	public char checkStatus() {
