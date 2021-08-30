@@ -22,6 +22,10 @@ public class TicTacToeGame {
 		else
 			tic.computerMove();
 		
+		char a = tic.checkStatus();
+		
+	
+		
 	}
 	
 	public void createBoard() {
@@ -72,12 +76,12 @@ public class TicTacToeGame {
 				System.out.println("Not a valid location. Try again");
 				continue;
 			}
-			if(tic.board[location] != ' ')
+			if(board[location] != ' ')
 			{
 				System.out.println("Entered location is already filled. Try again");
 				continue;
 			}
-			tic.board[location] = tic.userChoice;
+			board[location] = userChoice;
 			break;
 		}
 	}
@@ -108,7 +112,33 @@ public class TicTacToeGame {
 	}
 	
 	public void computerMove() {
-		
+			
+	}
+	
+	public char checkStatus() {
+		char winner = 't';
+		char arr[] = board;
+		for(int row=1 , col=1; row<10 && col<4 ; row+=3, col++ )
+		{
+			if(arr[row] == 'X' && arr[row+1] == 'X' && arr[row+2] == 'X') {
+				winner = 'X';
+			}
+			else if(arr[row] == 'O' && arr[row+1] == 'O' && arr[row+2] == 'O') {
+				winner = 'O';
+			}
+			else if(arr[col] == 'X' && arr[col+3] == 'X' && arr[col+6] == 'X') {
+				winner = 'X';
+			}
+			else if(arr[col] == 'O' && arr[col+3] == 'O' && arr[col+6] == 'O') {
+				winner = 'O';
+			}
+		}
+		for(int i=1; i<10; i++)
+		{
+			if(arr[i] == ' ')
+				return winner;
+		}
+		return winner;
 	}
 	
 	
