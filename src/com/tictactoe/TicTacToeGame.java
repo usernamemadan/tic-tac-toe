@@ -12,37 +12,52 @@ public class TicTacToeGame {
 	public static void main(String[] args) {
 	
 		System.out.println("welcome to the game");
+		int wantToPlay;
 		
-		tic.createBoard();
-		tic.input();
-		tic.displayBoard();
-        
-		boolean userWonToss = tic.toss();
-		char winner = 'p';
-		while(winner == 'p') {
-			if(userWonToss)
-			{
-				tic.userMove();
+		do {
+			tic.createBoard();
+			tic.input();
+			boolean userWonToss = tic.toss();
+			tic.displayBoard(); 
+			
+			char winner = 'p';
+			while(winner == 'p') {
+				if(userWonToss)
+				{
+					tic.userMove();
+				}
+				else {
+					tic.computerMove();
+				}
+				tic.displayBoard();
+				winner = tic.checkStatus(); 
+				
+				if(winner == tic.userChoice) {
+					System.out.println("You won the game!..");
+				}
+				else if(winner ==  tic.computerChoice) {
+					System.out.println("Computer won the game!..");
+				}
+				else if(winner == 't') {
+					System.out.println("Match drawn..");
+				}
+				
+				userWonToss = !userWonToss;		
+			}
+			
+			System.out.println("Do you want to play agiain? (y/n)");
+			Scanner sc =new Scanner(System.in);
+			char choice = sc.next().charAt(0);
+			if(choice == ( 'n' | 'N' )) {
+				wantToPlay = 0;
+				System.out.println("Thank you for playing. Exiting the game");
 			}
 			else {
-				tic.computerMove();
+				wantToPlay = 1;	
+				System.out.println("Starting the game..");
 			}
-			tic.displayBoard();
-			winner = tic.checkStatus(); 
-			
-			if(winner == tic.userChoice) {
-				System.out.println("You won the game!..");
-			}
-			else if(winner ==  tic.computerChoice) {
-				System.out.println("Computer won the game!..");
-			}
-			else if(winner == 't') {
-				System.out.println("Match drawn..");
-			}
-			
-			userWonToss = !userWonToss;	
-		}
-		
+				
+		}while(wantToPlay == 1);	
 	
 	}
 	
