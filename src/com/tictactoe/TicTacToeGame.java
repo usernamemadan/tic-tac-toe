@@ -112,7 +112,62 @@ public class TicTacToeGame {
 	}
 	
 	public void computerMove() {
+		char[] arr = board;
+		char temp = computerChoice;
+		int loc = 0;
+		int n = 0;
+		while(n < 2) {
+			for(int row=1 , col=1; row<10 && col<4 ; row+=3, col++ ) {
+				if(arr[row] + arr[row+1] + arr[row+2] == temp + temp + ' ') {
+					if(arr[row] == ' ')
+						loc = row;
+					else if(arr[row+1] == ' ')
+						loc = row+1;
+					else 
+						loc = row+2;
+					board[loc] = computerChoice;
+					return;
+				}
+				if(arr[col] + arr[col+3] + arr[col+6] == temp + temp + ' ') {
+					if(arr[col] == ' ')
+						loc = col;
+					else if(arr[col+3] == ' ')
+						loc = col+3;
+					else 
+						loc = col+6;
+					board[loc] = computerChoice;
+					return;
+				}
+			}
 			
+			if(arr[1] + arr[5] + arr[9] ==  temp + temp + ' ') {
+				
+				if(arr[1] == ' ')
+					loc = 1;
+				else if(arr[5] == ' ')
+					loc = 5;
+				else
+					loc = 9;
+				board[loc] = computerChoice;
+				return;
+				
+			}
+			
+			if(arr[3] + arr[5] + arr[7] ==  temp + temp + ' ') {
+				
+				if(arr[3] == ' ')
+					loc = 3;
+				else if(arr[5] == ' ')
+					loc = 5;
+				else
+					loc = 7;
+				board[loc] = computerChoice;
+				return;
+			}
+			
+			temp = userChoice;
+			n++;
+		}
 	}
 	
 	public char checkStatus() {
