@@ -17,21 +17,33 @@ public class TicTacToeGame {
 		tic.input();
 		tic.displayBoard();
         
-		if(tic.toss())
-			tic.userMove();
-		else
-			tic.computerMove();
-		
-		char a = 'p';
-		while (a == 'p') {
-			tic.userMove();
-			tic.computerMove();
-			a = tic.checkStatus(); 
+		boolean userWonToss = tic.toss();
+		char winner = 'p';
+		while(winner == 'p') {
+			if(userWonToss)
+			{
+				tic.userMove();
+			}
+			else {
+				tic.computerMove();
+			}
+			tic.displayBoard();
+			winner = tic.checkStatus(); 
+			
+			if(winner == tic.userChoice) {
+				System.out.println("You won the game!..");
+			}
+			else if(winner ==  tic.computerChoice) {
+				System.out.println("Computer won the game!..");
+			}
+			else if(winner == 't') {
+				System.out.println("Match drawn..");
+			}
+			
+			userWonToss = !userWonToss;	
 		}
-	
 		
 	
-		
 	}
 	
 	public void createBoard() {
@@ -69,11 +81,12 @@ public class TicTacToeGame {
 		System.out.println(board[4] +" | " +board[5]+ " | "+ board[6]);
 		System.out.println("---------");
 		System.out.println(board[7] +" | " +board[8]+ " | "+ board[9]);
+		System.out.println();
 		
 	}
 	
-	public void selectLocation() {
-		System.out.println("Enter digit in between 1-9 to selct the location");
+	public void userMove() {
+		System.out.println("Your Move: \nEnter digit between 1-9 to selct the location");
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			int location = sc.nextInt();
@@ -100,7 +113,6 @@ public class TicTacToeGame {
 		Scanner sc = new Scanner(System.in);
 		int choice = sc.nextInt();
 		int result = 1 + (int) (Math.random()*10%2) ;
-		System.out.println(result);
 		if( choice == result)
 		{
 			System.out.println("You won the toss");
@@ -113,11 +125,8 @@ public class TicTacToeGame {
 		
 	}
 	
-	public void userMove() {
-		
-	}
-	
 	public void computerMove() {
+		System.out.println("\nComputer's move:");
 		char[] arr = board;
 		char temp = computerChoice;
 		int loc = 0;
@@ -204,22 +213,33 @@ public class TicTacToeGame {
 		{
 			if(arr[row] == 'X' && arr[row+1] == 'X' && arr[row+2] == 'X') {
 				winner = 'X';
+				break;
 			}
 			else if(arr[row] == 'O' && arr[row+1] == 'O' && arr[row+2] == 'O') {
 				winner = 'O';
+				break;
 			}
 			else if(arr[col] == 'X' && arr[col+3] == 'X' && arr[col+6] == 'X') {
 				winner = 'X';
+				break;
 			}
 			else if(arr[col] == 'O' && arr[col+3] == 'O' && arr[col+6] == 'O') {
 				winner = 'O';
+				break;
 			}
 		}
-		for(int i=1; i<10; i++)
+		
+		if(winner == 't')
 		{
-			if(arr[i] == ' ')
-				return winner;
+			for(int i=1; i<10; i++)
+			{
+				if(arr[i] == ' ') {
+					winner = 'p';
+					break;
+				}
+			}
 		}
+		
 		return winner;
 	}
 	
