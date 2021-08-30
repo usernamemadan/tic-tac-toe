@@ -22,7 +22,13 @@ public class TicTacToeGame {
 		else
 			tic.computerMove();
 		
-		char a = tic.checkStatus();
+		char a = 'p';
+		while (a == 'p') {
+			tic.userMove();
+			tic.computerMove();
+			a = tic.checkStatus(); 
+		}
+	
 		
 	
 		
